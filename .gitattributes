@@ -1,1 +1,2 @@
 res/Developer_Survey_2019/survey_results_public.csv filter=lfs diff=lfs merge=lfs -text
+res/Developer_Survey_2019/survey_results.db filter=lfs diff=lfs merge=lfs -text
