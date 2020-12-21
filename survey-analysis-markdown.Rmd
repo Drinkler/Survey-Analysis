@@ -1,0 +1,97 @@
+---
+title: "Stack Overflow Developer Survey Results 2019 Analysis"
+author: "Florian Drinkler"
+date: "12 12 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+survey <- read.csv(file = 'res/Developer_Survey_2019/survey_results_public.csv')
+survey
+```
+```{r}
+survey
+```
+
+```{r}
+dim(survey)
+```
+
+```{r}
+str(survey)
+```
+
+Nach stundenlanger, versuchter, erstellung einer .db-Datei mit sqlite und Sqlite Studio wurde der Fehler entdeckt, dass bei Respondent immer am Anfang Charackter gefehlt haben, behoben. Das Problem war das Format des Zeilenendes. Dieser war LF aber es musste CRLF sein. Und die richtige Tabelle musste erstellt werden.
+
+```{r}
+library(DBI)
+con <- dbConnect(RSQLite::SQLite(), "res/Developer_Survey_2019/survey_results.db")
+dbReadTable(con, "survey_results")
+```
+```{r}
+dbListTables(con)
+```
+
+
+```{r}
+dbListFields(con, "survey_results")
+```
+
+
+```{r}
+dbDisconnect(con)
+```
+
+```{r}
+# Date wurde in Working-Directory abgelegt
+data <- read.csv2("res/Developer_Survey_2019/survey_results_public.csv", na = "NA", sep = ",")
+
+library(DBI)
+con <- dbConnect(RSQLite::SQLite(), ":memory:")
+
+dbWriteTable(con, "stackoverflow", data)
+dbListTables(con)
+
+dbListFields(con, "stackoverflow")
+
+dbReadTable(con, "stackoverflow")
+
+
+
+```
+```{r}
+test<-dbSendQuery(con, "select * from stackoverflow;")
+dbFetch(test)
+```
+
+
+```{r}
+dbDisconnect(con)
+```
+
