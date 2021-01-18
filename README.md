@@ -1,4 +1,4 @@
-# Survey-Analysis
+# :bar_chart: Survey-Analysis
 Stack Overflow Developer Survey Results 2019 Analysis in R
 
 [![GitHub](https://img.shields.io/github/license/drinkler/survey-analysis)](https://github.com/drinkler/survey-analysis/blob/master/LICENSE)
@@ -8,7 +8,7 @@ Stack Overflow Developer Survey Results 2019 Analysis in R
 
 ## About
 
-This project emerged from the requirements of a study project. During the implementation we tried to use current best practices of software development and to get to know new ones.
+This project emerged from the requirements of a study project. During the implementation I tried to use current best practices of software development and to get to know new ones.
 
 # Authors :busts_in_silhouette:
 
